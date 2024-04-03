@@ -1,0 +1,104 @@
+﻿@model BeneficiarioWeb.Models.Beneficiario
+
+@{
+    var idEmp = ViewData["empleadoID"];
+}
+
+<h4>Crea Beneficiario</h4>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <input type="hidden" asp-for="IdEmpleado" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <input type="hidden"  asp-for="IdEmpleado" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Apellidos" class="control-label"></label>
+                <input asp-for="Apellidos" class="form-control" />
+                <span asp-validation-for="Apellidos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaNacimiento" class="control-label"></label>
+                <input asp-for="FechaNacimiento" class="form-control" />
+                <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CURP" class="control-label"></label>
+                <input asp-for="CURP" class="form-control" />
+                <span asp-validation-for="CURP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SSN" class="control-label"></label>
+                <input asp-for="SSN" class=" form-control" />
+                <span asp-validation-for="SSN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefono" class="control-label"></label>
+                <input asp-for="Telefono" class=" form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nacionalidad" class="control-label"></label>
+                <input asp-for="Nacionalidad" class=" form-control" />
+                <span asp-validation-for="Nacionalidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Porcentaje" class="control-label"></label>
+                <input asp-for="Porcentaje" class=" form-control" />
+                <span asp-validation-for="Porcentaje" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="button" id="btnSubmit"  value="Create" class="btn btn-primary" />
+                <a class="btn btn-secondary" asp-controller="Empleado" asp-action="Detalle" asp-route-id=@idEmp>Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            console.log('Se ha cargado CREAR Beneficiarios');
+        });
+
+        $("#btnSubmit").click(function () {
+            var valIdEmpleado = $("#IdEmpleado").val();          
+            var valProcentaje = $("#Porcentaje").val();
+            var res = 0;
+            console.log('Valores Empleado:' + valIdEmpleado +" Porcentaje:" + valProcentaje);
+
+            if (valProcentaje <= 0) {
+                alert("El porcentaje no puede ser igual o menor a cero");
+            }
+            else
+                $.ajax({
+                    type: "GET",
+                    url: "@Url.Action("PorcentajeTotal")",
+                    data: { idEmpleado: valIdEmpleado, Porcentaje: valProcentaje },
+                    success: function (result) {
+                        console.log(result);
+                        if (result == -1) {
+                            alert("El porcentaje excede al 100% de los beneficiarios del empleado");
+                        }
+                        else {
+                            document.forms[0].submit();
+                        }
+                    },
+                    error: function (req, status, error) {
+                        console.log(status);
+                    }
+                });
+        });
+    </script>
+}

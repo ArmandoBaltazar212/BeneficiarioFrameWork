@@ -1,0 +1,67 @@
+﻿@model IEnumerable<BeneficiarioWeb.Models.Empleado>
+
+<h1>Empleado</h1>
+
+<div class="row mb-3">
+    <div class="col-6">
+        <a class="btn btn-primary" asp-action="Create">
+            <i class="fa-solid fa-plus"></i>&nbsp;Agregar Empleado
+        </a>
+    </div>
+</div>
+
+<table class="table table-hover table-bordered table-strip">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellidos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaNacimiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumeroEmpleado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefono)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apellidos)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaNacimiento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumeroEmpleado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </td>
+                <td>
+                    <a asp-action="Edita" asp-route-id="@item.Id" class="btn btn-secondary">
+                        <i class="fa-solid fa-pen-to-square"></i>&nbsp;Editar
+                    </a>
+                    <a asp-action="Detalle" asp-route-id="@item.Id" class="btn btn-info">
+                        <i class="fa-solid fa-rectangle-list"></i>&nbsp;Detalle Beneficiarios
+                    </a>
+                    <a asp-action="Eliminar" asp-route-id="@item.Id" class="btn btn-danger">
+                        <i class="fa-solid fa-trash"></i>&nbsp;Eliminar
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

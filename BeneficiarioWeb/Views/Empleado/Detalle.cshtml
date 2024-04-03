@@ -1,0 +1,94 @@
+﻿@* @model EmpleadoWeb.Models.Empleado *@
+@model BeneficiarioWeb.Models.Dto.EmpleadoBeneficiarios
+
+<h1>Empleado</h1>
+@{
+    var idEmpleado = @Html.ValueFor(model => model.Empleado.Id);
+}
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Empleado.Nombre)
+            
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Empleado.Nombre)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Empleado.Apellidos)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Empleado.Apellidos)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Empleado.FechaNacimiento)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Empleado.FechaNacimiento)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Empleado.NumeroEmpleado)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Empleado.NumeroEmpleado)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Empleado.CURP)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Empleado.CURP)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Empleado.SSN)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Empleado.SSN)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Empleado.Telefono)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Empleado.Telefono)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Empleado.Nacionalidad)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Empleado.Nacionalidad)
+        </dd>
+    </dl>
+</div>
+
+
+<div class="row mb-3">
+    <div class="col-6">
+        <a class="btn btn-primary" asp-action="Create" asp-controller="Beneficiario" asp-route-idEmpleado="@idEmpleado"  >
+            <i class="fa-solid fa-plus"></i>&nbsp;Agregar beneficiario
+        </a>
+        <a class="btn btn-secondary" asp-action="Index" asp-controller="Empleado">
+            <i class="fa-solid fa-plus"></i>&nbsp;Ir a lista de empleados
+        </a>
+    </div>
+</div>
+
+
+@* ******************** Lista de Beneficuiarios ********************** *@
+@* <partial name="_ListaBeneficiarios" model="Model.Beneficiarios" /> *@
+@* ******************** Opción 2 con tag Helper Html.PartialAsync *** *@
+@await Html.PartialAsync("_ListaBeneficiarios", @Model.Beneficiarios )

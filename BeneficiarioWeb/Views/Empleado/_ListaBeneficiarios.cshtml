@@ -1,0 +1,74 @@
+﻿@model IEnumerable<BeneficiarioWeb.Models.Beneficiario>
+
+<div>
+    <table class="table table-hover table-bordered table-strip">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayName("Nombre")
+                </th>
+                <th>
+                    @Html.DisplayName("Apellidos")
+                </th>
+                <th>
+                    @Html.DisplayName("Fecha de Nacimiento")
+                </th>
+                <th>
+                    @Html.DisplayName("CURP")
+                </th>
+                <th>
+                    @Html.DisplayName("SSN")
+                </th>
+                <th>
+                    @Html.DisplayName("Telefono")
+                </th>
+                <th>
+                    @Html.DisplayName("Nacionalidad")
+                </th>
+                <th>
+                    @Html.DisplayName("Porcentaje")
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Apellidos)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaNacimiento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CURP)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SSN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telefono)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nacionalidad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Porcentaje)
+                    </td>
+                    <td>
+                        <a asp-controller="Beneficiario" asp-action="Edita" asp-route-id="@item.Id" class="btn btn-secondary">
+                            <i class="fa-solid fa-pen-to-square"></i>&nbsp;Editar
+                        </a>
+                        <a asp-controller="Beneficiario" asp-action="Eliminar" asp-route-id="@item.Id" asp-route-idEmpleado="@item.IdEmpleado" ,"@" class="btn btn-danger">
+                            <i class="fa-solid fa-trash"></i>&nbsp;Eliminar
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
